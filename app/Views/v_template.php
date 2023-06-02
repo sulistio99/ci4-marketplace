@@ -31,7 +31,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <?php if (session('id_user')) {
   echo '<body class="hold-transition sidebar-mini layout-navbar-fixed">';
 } else {
-  echo '<body class="hold-transition layout-top-nav">';
+  echo '<body class="hold-transition layout-top-nav layout-navbar-fixed">';
 } ?>
 
 <!-- /.layout-top-nav -->
@@ -169,7 +169,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <a class="nav-link" href="<?= base_url('Auth/Registrasi'); ?>"><i class="fas fa-user-plus"></i> Daftar</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('Auth'); ?>"><i class="fas fa-user-plus"></i> Masuk</a>
+            <a class="nav-link" href="<?= base_url('Auth'); ?>"><i class="fas fa-user"></i> Masuk</a>
           </li>
         <?php } ?>
       </ul>

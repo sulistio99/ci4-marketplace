@@ -95,7 +95,40 @@ class Home extends BaseController
 
     public function Kategori($id_kategori)
     {
-        $id_user = session('id_user');
+        $keywoard = $this->request->getPost('keywoard');
+        if ($keywoard) {
+            $b =  $this->ModelBarang->get_keywoard3($keywoard, $id_kategori);
+            if (!$b) {
+                $data2 = [
+                    'title' => 'KATEGORI',
+                    'menu' => '',
+                    'submenu' => '',
+                    'page' => 'v_halaman_kategori',
+                    'kategori' => $this->ModelKategori->AllData(),
+                    'judulkategori' => $this->ModelKategori->JudulKategori($id_kategori),
+                    'barang' => $this->ModelKategori->HalamanKategori($id_kategori),
+                    'b' => $b,
+                    'barangp' => $this->ModelBarang->paginate(12, 'barangp'),
+                    'pager' => $this->ModelBarang->pager,
+                ];
+                return view('v_template', $data2);
+            }
+        } else {
+            $b =  $this->ModelKategori->HalamanKategori($id_kategori);
+            $data1 = [
+                'title' => 'KATEGORI',
+                'menu' => '',
+                'submenu' => '',
+                'page' => 'v_halaman_kategori',
+                'kategori' => $this->ModelKategori->AllData(),
+                'judulkategori' => $this->ModelKategori->JudulKategori($id_kategori),
+                'barang' => $this->ModelKategori->HalamanKategori($id_kategori),
+                'b' => $b,
+                'barangp' => $this->ModelBarang->paginate(12, 'barangp'),
+                'pager' => $this->ModelBarang->pager,
+            ];
+            return view('v_template', $data1);
+        }
         $data = [
             'title' => 'KATEGORI',
             'menu' => '',
@@ -104,6 +137,9 @@ class Home extends BaseController
             'kategori' => $this->ModelKategori->AllData(),
             'judulkategori' => $this->ModelKategori->JudulKategori($id_kategori),
             'barang' => $this->ModelKategori->HalamanKategori($id_kategori),
+            'b' => $b,
+            'barangp' => $this->ModelBarang->paginate(12, 'barangp'),
+            'pager' => $this->ModelBarang->pager,
             // 'cart' => $this->ModelBarang->AllCart($id_user),
             // 'totalcart' => $this->ModelBarang->TotalCart($id_user),
             // 'totaltransaksipembelian' => $this->ModelBarang->TotalTransaksiPembelian($id_user),
@@ -135,7 +171,7 @@ class Home extends BaseController
     public function DetailToko($id_user)
     {
         $keywoard = $this->request->getPost('keywoard');
-        $detailidtoko = $this->request->getPost('id_user');
+        // $detailidtoko = $this->request->getPost('id_user');
         if ($keywoard) {
             $b =  $this->ModelBarang->get_keywoard2($keywoard, $id_user);
             if (!$b) {

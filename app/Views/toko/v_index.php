@@ -117,7 +117,7 @@
                     </div>
                 <?php } ?>
             </div>
-            <?= $pager->links('barang', 'paging'); ?>
+            <?= $pager->links('b', 'paging'); ?>
         </div>
     </section>
 </div>

@@ -10,7 +10,7 @@
         <div class="col">
           <?php echo form_open('') ?>
           <div class="input-group">
-            <input type="text" class="form-control form-control-lg" placeholder="Pencarian" name="keywoard">
+            <input type="text" class="form-control form-control-lg" placeholder="Pencarian kategori barang" name="keywoard">
             <div class="input-group-append">
               <button type="submit" class="btn btn-lg btn-default">
                 <i class="fa fa-search"></i>
@@ -20,9 +20,29 @@
           <?php echo form_close() ?>
         </div>
       </div>
+      <?php if (!$b) { ?>
+        <div class="row">
+          <div class="col">
+            <section class="py-3">
+              <div class="container">
+                <div class="row text-center">
+                  <div class="col">
+                    <img src="<?= base_url('foto/emptysearch.png'); ?>" width="120">
+                  </div>
+                </div>
+                <div class="row text-center py-3">
+                  <div class="col">
+                    <h5>Barang tidak ditemukan dihalaman kategori ini.</h5>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      <?php } ?>
       <br>
       <div class="row">
-        <?php foreach ($barang as $key => $value) { ?>
+        <?php foreach ($b as $key => $value) { ?>
           <div class="col-6 col-md-3 col-lg-2 mb-5">
             <?php echo form_open_multipart('User/TambahCart/' . session('id_user')) ?>
             <!-- id informasi barang -->
@@ -70,6 +90,7 @@
           </div>
         <?php } ?>
       </div>
+      <?= $pager->links('b', 'paging'); ?>
     </div>
   </section>
 </div>
@@ -102,6 +123,11 @@
                 <tr class="text-center">
                   <td colspan="3">
                     <h4><b><?= $value['nama_barang']; ?></b></h4>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="3">
+                    <a href="<?= base_url('Home/DetailToko/' . $value['id_user']); ?>" class="btn btn-default btn-sm"><i class="fa-solid fa-store"></i> Kunjungi Toko</a>
                   </td>
                 </tr>
                 <tr>

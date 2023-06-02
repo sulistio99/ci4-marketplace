@@ -277,4 +277,17 @@ class ModelBarang extends Model
       ->where('tb_barang.id_user', $id_user)
       ->get()->getResultArray();
   }
+
+  public function get_keywoard3($keywoard, $id_kategori)
+  {
+    // $subQuery = $this->db->table('tb_barang')->select('nama_barang')->where('id_user', $detailidtoko);
+    return $this->db->table('tb_barang')
+      ->join('tb_user', 'tb_user.id_user=tb_barang.id_user')
+      ->join('tb_kategori', 'tb_kategori.id_kategori=tb_barang.id_kategori')
+      ->like('nama_barang', $keywoard)
+      ->where('tb_kategori.id_kategori', $id_kategori)
+      ->orLike('harga_barang', $keywoard)
+      ->where('tb_kategori.id_kategori', $id_kategori)
+      ->get()->getResultArray();
+  }
 }
